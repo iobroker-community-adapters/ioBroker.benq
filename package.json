@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/instalator/iobroker.benq"
+    "url": "https://github.com/instalator/ioBroker.benq.git"
   },
   "dependencies": {
     "async": "*",
