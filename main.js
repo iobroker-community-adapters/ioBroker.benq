@@ -152,7 +152,7 @@ function connect(cb){
             if (~buffer.indexOf('VOL')){
                 msg = 'VOL';
             }
-            if ((msg.length > 5 && msg.charAt(msg.indexOf('=') + 1) !== '?') || msg == 'VOL'){
+            if ((msg.length > 5 && msg.charAt(msg.indexOf('=') + 1) !== '?') || msg === 'VOL'){
                 adapter.log.debug('Received message:' + msg);
                 parse_command(msg);
             }
