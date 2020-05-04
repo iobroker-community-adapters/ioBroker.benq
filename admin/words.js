@@ -1,10 +1,52 @@
-// Dictionary (systemDictionary is global variable from adapter-settings.js)
+/*global systemDictionary:true */
+'use strict';
 systemDictionary = {
-	"template adapter settings": {"de": "Beispiel", "ru": "Пример"},
-	"test1":                    {"en": "Test 1", "de": "Test 1", "ru": "Тест 1"},
-	"test2":                    {"en": "Test 2", "de": "Test 2", "ru": "Тест 2"},
-	"on save adapter restarts with new config immediately": {
-		"de": "Beim Speichern von Einstellungen der Adapter wird sofort neu gestartet.",
-		"ru": "Сразу после сохранения настроек драйвер перезапуститься с новыми значениями"
-	}
+    "host":                                                 {
+        "en":    "IP address",
+        "de":    "IP Adresse",
+        "ru":    "IP Р°РґСЂРµСЃ",
+        "pt":    "endereГ§o de IP",
+        "nl":    "IP adres",
+        "fr":    "adresse IP",
+        "it":    "indirizzo IP",
+        "es":    "direcciГіn IP",
+        "pl":    "adres IP",
+        "zh-cn": "IPењ°еќЂ"
+    },
+    "port":                                                 {
+        "en":    "Port",
+        "de":    "Port",
+        "ru":    "РџРѕСЂС‚",
+        "pt":    "porta",
+        "nl":    "haven",
+        "fr":    "Port",
+        "it":    "porta",
+        "es":    "Puerto",
+        "pl":    "Port",
+        "zh-cn": "жёЇеЏЈ"
+    },
+    "model":                                                {
+        "en":    "Model",
+        "de":    "Modell",
+        "ru":    "РњРѕРґРµР»СЊ",
+        "pt":    "Modelo",
+        "nl":    "Model",
+        "fr":    "ModГЁle",
+        "it":    "Modello",
+        "es":    "Modelo",
+        "pl":    "Model",
+        "zh-cn": "жЁЎећ‹"
+    },
+    "Select Option":                                        {
+        "en":    "Select model",
+        "de":    "Modell auswГ¤hlen",
+        "ru":    "Р’С‹Р±РµСЂРёС‚Рµ РјРѕРґРµР»СЊ",
+        "pt":    "Selecionar modelo",
+        "nl":    "Selecteer model",
+        "fr":    "SГ©lectionnez le modГЁle",
+        "it":    "Seleziona il modello",
+        "es":    "Seleccionar modelo",
+        "pl":    "Wybierz model",
+        "zh-cn": "йЂ‰ж‹©ећ‹еЏ·"
+    }
 };

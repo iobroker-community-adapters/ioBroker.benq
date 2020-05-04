@@ -1,107 +1,102 @@
 {
-    "common": {
-        "name": "benq",
-        "version": "0.2.0",
-        "news": {
-            "0.2.0": {
-                "en": "fix error",
-                "de": "fix error",
-                "ru": "fix error",
-                "pt": "fix error",
-                "fr": "fix error",
-                "nl": "fix error"
-            },
-            "0.1.0": {
-                "en": "Beta release",
-                "de": "Beta release",
-                "ru": "Beta release",
-                "pt": "Beta release",
-                "fr": "Beta release",
-                "nl": "Beta release"
-            },
-            "0.0.6": {
-                "en": "Change README",
-                "de": "Change README",
-                "ru": "Change README",
-                "pt": "Change README",
-                "fr": "Change README",
-                "nl": "Change README"
-            },
-            "0.0.4": {
-                "en": "alfa version",
-                "de": "alfa version",
-                "ru": "alfa version",
-                "pt": "alfa version",
-                "fr": "alfa version",
-                "nl": "alfa version"
-            },
-            "0.0.1": {
-                "en": "initial adapter",
-                "de": "Initiale Version",
-                "ru": "Первоначальный адаптер",
-                "pt": "Versão inicial",
-                "fr": "Version initiale",
-                "nl": "Eerste release"
-            }
-        },
-        "title": "BenQ projector",
-        "desc": {
-            "en": "ioBroker BenQ projector Adapter",
-            "de": "ioBroker Adapter für BenQ Beamer",
-            "ru": "BenQ projector драйвер",
-            "pt": "Modelo de adaptador para o ioBroker",
-            "fr": "ioBroker adaptateur modèle",
-            "nl": "ioBroker BenQ Adapter"
-        },
-        "authors": [
-            "instalator"
-        ],
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "icon": "benq.png",
-        "enabled": false,
-        "extIcon": "https://raw.githubusercontent.com/instalator/iobroker.benq/master/admin/benq.png",
-        "keywords": ["benq projector"],
-        "readme": "https://github.com/instalator/iobroker.benq/blob/master/README.md",
-        "loglevel": "info",
-        "type": "multimedia"
+  "common": {
+    "name": "benq",
+    "version": "0.2.1",
+    "news": {
+      "0.2.1": {
+        "en": "support compact mode\nsupport admin3\nrefactoring",
+        "de": "support compact mode\nsupport admin3\nrefactoring",
+        "ru": "support compact mode\nsupport admin3\nrefactoring",
+        "pt": "support compact mode\nsupport admin3\nrefactoring",
+        "nl": "support compact mode\nsupport admin3\nrefactoring",
+        "fr": "support compact mode\nsupport admin3\nrefactoring",
+        "it": "support compact mode\nsupport admin3\nrefactoring",
+        "es": "support compact mode\nsupport admin3\nrefactoring",
+        "pl": "support compact mode\nsupport admin3\nrefactoring",
+        "zh-cn": "support compact mode\nsupport admin3\nrefactoring"
+      },
+      "0.2.0": {
+        "en": "fix error",
+        "de": "fix error",
+        "ru": "fix error",
+        "pt": "fix error",
+        "fr": "fix error",
+        "nl": "fix error"
+      },
+      "0.1.0": {
+        "en": "Beta release",
+        "de": "Beta release",
+        "ru": "Beta release",
+        "pt": "Beta release",
+        "fr": "Beta release",
+        "nl": "Beta release"
+      }
     },
-    "native": {
-        "host": "127.0.0.1",
-        "port": 23
+    "title": "BenQ projector",
+    "desc": {
+      "en": "BenQ projector Adapter",
+      "de": "BenQ Projektor Adapter",
+      "ru": "BenQ адаптер для проектора",
+      "pt": "Adaptador de projetor BenQ",
+      "nl": "BenQ projector Adapter",
+      "fr": "Adaptateur de projecteur BenQ",
+      "it": "Adattatore per proiettore BenQ",
+      "es": "Adaptador de proyector BenQ",
+      "pl": "Adapter projektora BenQ",
+      "zh-cn": "明基投影机适配器"
     },
-    "objects": [
-
+    "authors": [
+      "instalator"
     ],
-    "instanceObjects": [
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected to BenQ projector",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {
-            }
-        },
-        {
-            "_id": "power",
-            "type": "state",
-            "common": {
-                "role": "button.power",
-                "name": "Controlling power",
-                "type": "boolean",
-                "read": false,
-                "write": true,
-                "def": false
-            },
-            "native": {
-            }
-        }
-    ]
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "icon": "benq.png",
+    "enabled": false,
+    "compact": true,
+    "materialize": true,
+    "extIcon": "https://raw.githubusercontent.com/instalator/iobroker.benq/master/admin/benq.png",
+    "keywords": [
+      "benq projector"
+    ],
+    "readme": "https://github.com/instalator/iobroker.benq/blob/master/README.md",
+    "loglevel": "info",
+    "type": "multimedia"
+  },
+  "native": {
+    "host": "127.0.0.1",
+    "port": 23
+  },
+  "objects": [
+  ],
+  "instanceObjects": [
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected to BenQ projector",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {
+      }
+    },
+    {
+      "_id": "power",
+      "type": "state",
+      "common": {
+        "role": "button.power",
+        "name": "Controlling power",
+        "type": "boolean",
+        "read": false,
+        "write": true,
+        "def": false
+      },
+      "native": {
+      }
+    }
+  ]
 }

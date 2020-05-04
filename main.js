@@ -1,139 +1,125 @@
 "use strict";
+const utils = require('@iobroker/adapter-core');
+let async = require('async');
+let net = require('net');
 
-var utils = require('@iobroker/adapter-core'); // Get common adapter utils
-var adapter = utils.Adapter('benq');
-var async = require('async');
-
-var net = require('net');
-var benq_commands = require(__dirname + '/admin/commands.json'),
+let benq_commands = require(__dirname + '/admin/commands.json'),
     COMMANDS = benq_commands.models,
     COMMAND_MAPPINGS = benq_commands.command_mapping;
-var connection = false, benq, query_power, rct, buffer = '';
-var permis = false,
-    permis_get_cmd = false,
-    states = {},
-    old_states = {},
-    pollcmd = 'vol=?',
-    polling_time = 10000;
+let adapter, connection = false, benq, query_power, rct, buffer = '', permis = false, permis_get_cmd = false, states = {}, old_states = {}, pollcmd = 'vol=?', polling_time = 10000;
 
-// is called when adapter shuts down - callback has to be called under any circumstances!
-adapter.on('unload', function (callback) {
-    if (benq){
-        clearInterval(query_power);
-        connection = false;
-        _connection(false);
-        benq.destroy();
-    }
-    try {
-        adapter.log.info('cleaned everything up...');
-        callback();
-    } catch (e) {
-        callback();
-    }
-});
-
-// is called if a subscribed object changes
-adapter.on('objectChange', function (id, obj) {
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
-
-// is called if a subscribed state changes
-adapter.on('stateChange', function (id, state) {
-    if (connection){
-        if (state && !state.ack) {
-            adapter.log.debug('stateChange ' + id + ' ' + JSON.stringify(state));
-            var ids = id.split(".");
-            var command = ids[ids.length - 1].toString();
-            var val = [state.val];
-            if (state.val === false || state.val === 'false'){
-                val = 'off';
-            } else if (state.val === true || state.val === 'true'){
-                val = 'on';
+function startAdapter(options){
+    return adapter = utils.adapter(Object.assign({}, options, {
+        systemConfig: true,
+        name:         'benq',
+        ready:        main,
+        unload:       callback => {
+            if (benq){
+                query_power && clearInterval(query_power);
+                rct && clearInterval(rct);
+                connection = false;
+                _connection(false);
+                benq.destroy();
             }
+            try {
+                adapter.log.debug('cleaned everything up...');
+                callback();
+            } catch (e) {
+                callback();
+            }
+        },
+        stateChange:  (id, state) => {
+            if (id && state && !state.ack){
+                adapter.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+                if (connection){
+                    let ids = id.split(".");
+                    let command = ids[ids.length - 1].toString();
+                    let val = [state.val];
+                    if (state.val === false || state.val === 'false'){
+                        val = 'off';
+                    } else if (state.val === true || state.val === 'true'){
+                        val = 'on';
+                    }
 
-            var cmd = COMMAND_MAPPINGS[command];
+                    let cmd = COMMAND_MAPPINGS[command];
 
-            if (cmd){
-                if (cmd === 'pow' && val === 'off'){
-                    permis_get_cmd = false;
-                    setTimeout(function (){
-                        permis_get_cmd = true;
-                    }, 120000);
+                    if (cmd){
+                        if (cmd === 'pow' && val === 'off'){
+                            permis_get_cmd = false;
+                            setTimeout(() => {
+                                permis_get_cmd = true;
+                            }, 120000);
 
-                } else if(cmd === 'pow' && val === 'on'){
-                    permis_get_cmd = false;
-                    setTimeout(function (){
-                        permis_get_cmd = true;
-                    }, 20000);
-                } else {
-                    permis_get_cmd = false;
-                    permis = false;
-                    setTimeout(function (){
-                        permis_get_cmd = true;
-                        permis = true;
-                    }, 5000);
-                }
-
-                if (states.pow || cmd === 'pow'){
-                    if (COMMANDS.hasOwnProperty(cmd) && COMMANDS[cmd].hasOwnProperty('values')){
-                        if (COMMANDS[cmd].values.hasOwnProperty(val)){
-                            benq.write('\r*' + cmd + '='+val + '#\r');
-                            benq.write('*' + cmd + '=' + val + '#\r');
-                            adapter.log.debug('Send Command:*' + cmd + '='+val + '#');
-
+                        } else if (cmd === 'pow' && val === 'on'){
+                            permis_get_cmd = false;
+                            setTimeout(() => {
+                                permis_get_cmd = true;
+                            }, 20000);
                         } else {
-                            adapter.log.error('Error value command =*' + cmd + '=' + val + '#');
+                            permis_get_cmd = false;
+                            permis = false;
+                            setTimeout(() => {
+                                permis_get_cmd = true;
+                                permis = true;
+                            }, 5000);
                         }
-                    } else if (COMMANDS.hasOwnProperty(cmd) && !COMMANDS[cmd].hasOwnProperty('values')){
-                        benq.write('\r*' + cmd + '#\r');
-                        benq.write('*' + cmd + '#\r');
-                        adapter.log.debug('Send Command:*' + cmd + '#');
+
+                        if (states.pow || cmd === 'pow'){
+                            if (COMMANDS.hasOwnProperty(cmd) && COMMANDS[cmd].hasOwnProperty('values')){
+                                if (COMMANDS[cmd].values.hasOwnProperty(val)){
+                                    benq.write('\r*' + cmd + '=' + val + '#\r');
+                                    benq.write('*' + cmd + '=' + val + '#\r');
+                                    adapter.log.debug('Send Command:*' + cmd + '=' + val + '#');
+
+                                } else {
+                                    adapter.log.error('Error value command =*' + cmd + '=' + val + '#');
+                                }
+                            } else if (COMMANDS.hasOwnProperty(cmd) && !COMMANDS[cmd].hasOwnProperty('values')){
+                                benq.write('\r*' + cmd + '#\r');
+                                benq.write('*' + cmd + '#\r');
+                                adapter.log.debug('Send Command:*' + cmd + '#');
+                            }
+                        }
+                    } else {
+                        adapter.log.error('Error command =*' + cmd + '=' + val + '#');
                     }
                 }
-            } else {
-                adapter.log.error('Error command =*' + cmd + '=' + val + '#');
             }
         }
-    }
-});
+    }));
+}
 
-adapter.on('ready', function () {
-    //adapter.config.model_options = 'W1200';
+function main(){
+    adapter.subscribeStates('*');
     if (COMMANDS[adapter.config.model_options]){
         COMMANDS = COMMANDS[adapter.config.model_options].commands;
-        main();
+        connect();
     } else {
         adapter.log.error('The selected model was not found in the file.');
     }
-
-});
-
-function main() {
-    adapter.subscribeStates('*');
-    connect();
 }
 
 function connect(cb){
-    var msg = '';
-    var port = adapter.config.port ? adapter.config.port : 23;
-    var host = adapter.config.host ? adapter.config.host : '192.168.1.53';
+    let msg = '';
+    let port = adapter.config.port ? adapter.config.port :23;
+    let host = adapter.config.host ? adapter.config.host :'192.168.1.53';
     adapter.log.debug('BenQ ' + adapter.config.model_options + ' connect to: ' + host + ':' + port);
-    benq = net.connect(port, host, function() {
+    benq = net.connect(port, host, () => {
         _connection(true);
-        clearInterval(query_power);
-        clearInterval(rct);
+        query_power && clearInterval(query_power);
+        rct && clearInterval(rct);
         permis = true;
         permis_get_cmd = true;
-        query_power = setInterval(function() {
-            if(permis){
+        query_power = setInterval(() => {
+            if (permis){
                 send(pollcmd);
             }
         }, polling_time);
         //benq.write('\r*error=report#\r');
         //get_commands();
-        if(cb){cb();}
+        cb && cb();
     });
-    benq.on('data', function(chunk) {
+    benq.on('data', (chunk) => {
         buffer += chunk.toString();
         //adapter.log.error('Received: ' + message);
         if (buffer.length > 50){
@@ -145,29 +131,29 @@ function connect(cb){
             benq.write('\r');
             buffer = '';
         }
-        if(chunk.toString() == '\r'){
+        if (chunk.toString() === '\r'){
             msg = buffer.split('*');
-            if(msg){
-                for (var i = 0; i < msg.length; i++) {
-                    if(msg[i].length > 5 && msg[i].charAt(msg[i].indexOf('=')+1) !== '?'){
+            if (msg){
+                for (let i = 0; i < msg.length; i++) {
+                    if (msg[i].length > 5 && msg[i].charAt(msg[i].indexOf('=') + 1) !== '?'){
                         msg = msg[i].substring(0, msg[i].indexOf('\r'));
                         msg = msg.replace('#', '');
                     }
                 }
             }
-            if(~buffer.indexOf('Illegal format')){
+            if (~buffer.indexOf('Illegal format')){
                 msg = 'Illegal format';
             }
-            if(~buffer.indexOf('Unsupported item')){
+            if (~buffer.indexOf('Unsupported item')){
                 msg = 'Unsupported item';
             }
-            if(~buffer.indexOf('Block item')){
+            if (~buffer.indexOf('Block item')){
                 msg = 'Block item';
             }
-            if(~buffer.indexOf('VOL')){
+            if (~buffer.indexOf('VOL')){
                 msg = 'VOL';
             }
-            if((msg.length > 5 && msg.charAt(msg.indexOf('=')+1) !== '?') || msg == 'VOL'){
+            if ((msg.length > 5 && msg.charAt(msg.indexOf('=') + 1) !== '?') || msg == 'VOL'){
                 adapter.log.debug('Received message:' + msg);
                 parse_command(msg);
             }
@@ -175,16 +161,16 @@ function connect(cb){
         }
     });
 
-    benq.on('error', function(err) {
+    benq.on('error', (err) => {
         adapter.log.error("BenQ: " + err);
         _connection(false);
-        if (err.code == "ENOTFOUND" || err.code == "ECONNREFUSED" || err.code == "ETIMEDOUT") {
+        if (err.code === "ENOTFOUND" || err.code === "ECONNREFUSED" || err.code === "ETIMEDOUT"){
             benq.destroy();
         }
     });
 
-    benq.on('close', function(e) {
-        if(connection){
+    benq.on('close', (e) => {
+        if (connection){
             adapter.log.info('BenQ disconnected');
             _connection(false);
         }
@@ -195,14 +181,14 @@ function connect(cb){
 function reconnect(t, cb){
     permis = false;
     benq.destroy();
-    var time = (t) ? t : 30000;
-    rct = setTimeout(function() {
+    let time = (t) ? t :30000;
+    rct = setTimeout(() => {
         connect();
     }, time);
 }
 
 function send(cmd, val){
-    if (val == undefined){
+    if (val === undefined){
         adapter.log.debug('Send Command:*' + cmd + '#');
         benq.write('\r*' + cmd + '#\r');
     } else {
@@ -212,35 +198,35 @@ function send(cmd, val){
 }
 
 function parse_command(str){
-    var cmd, val;
+    let cmd, val;
     if (!~str.indexOf('Unsupported') && !~str.indexOf('Block') && !~str.indexOf('Illegal')){
         cmd = str.split('=')[0];
         val = str.split('=')[1];
-        if(str == 'VOL'){
+        if (str === 'VOL'){
             cmd = 'pow';
             val = 'off';
         }
         if (cmd && val){
             val = val_to_bool(val.replace(/\s/g, '').toLowerCase());
-            if(!COMMANDS[cmd]){
+            if (!COMMANDS[cmd]){
                 adapter.log.debug('Please send this information to the developer: {' + 'cmd:' + cmd + ', val:' + val + '}');
             } else {
-                if (cmd == 'vol' || (cmd == 'pow' && val == 'on')){
+                if (cmd === 'vol' || (cmd === 'pow' && val === 'on')){
                     states.pow = true;
-                    if(states.pow !== old_states.pow){
+                    if (states.pow !== old_states.pow){
                         old_states.pow = states.pow;
                         adapter.log.info(COMMANDS.pow.name + '{cmd:pow, val:' + states.pow + '}');
-                        setObject (COMMANDS.pow.name, true);
+                        setObject(COMMANDS.pow.name, true);
                     }
                     get_commands();
                 }
 
                 cmd = cmd.toLowerCase();
                 states[cmd] = val;
-                if(states[cmd] !== old_states[cmd]){
+                if (states[cmd] !== old_states[cmd]){
                     old_states[cmd] = states[cmd];
                     adapter.log.info(COMMANDS[cmd].name + '{' + 'cmd:' + cmd + ', val:' + val + '}');
-                    setObject (COMMANDS[cmd].name, val);
+                    setObject(COMMANDS[cmd].name, val);
                 }
             }
         }
@@ -248,39 +234,39 @@ function parse_command(str){
 }
 
 function get_commands(){
-    var result = [];
+    let result = [];
     permis = false;
-    setTimeout(function (){
+    setTimeout(() => {
         permis = true;
     }, 60000);
-    async.each(Object.keys(COMMANDS), function (cmd) {
+    async.each(Object.keys(COMMANDS), (cmd) => {
         result.push(cmd);
-    }, function (err) {
+    }, (err) => {
         adapter.log.error('Error async.each');
     });
-    result.forEach(function(cmd, i, arr) {
-        setTimeout(function() {
+    result.forEach((cmd, i, arr) => {
+        setTimeout(() => {
             if (COMMANDS[cmd] && permis_get_cmd){
                 if (COMMANDS[cmd].hasOwnProperty('values')){
                     adapter.log.debug('send_command ' + COMMANDS[cmd].name);
-                    if(cmd !== 'pow'){
+                    if (cmd !== 'pow'){
                         send(cmd, '?');
                     }
                 } else {
-                    setObject (COMMANDS[cmd].name, false);
+                    setObject(COMMANDS[cmd].name, false);
                 }
             }
         }, i * 5000);
     });
 }
 
-function setObject (name, val){
-    var type = 'string';
-    var role = 'media';
+function setObject(name, val){
+    let type = 'string';
+    let role = 'media';
     adapter.log.debug('name:' + name);
-    var odj_cmd = COMMANDS[COMMAND_MAPPINGS[name]];
+    let odj_cmd = COMMANDS[COMMAND_MAPPINGS[name]];
     adapter.log.debug('odj_cmd:' + JSON.stringify(odj_cmd));
-    adapter.getState(name, function (err, state){
+    adapter.getObject(name, (err, state) => {
         if (odj_cmd){
             if ((err || !state) && odj_cmd.hasOwnProperty('description')){
                 if (odj_cmd.hasOwnProperty('values')){
@@ -331,4 +317,10 @@ function val_to_bool(val){
         val = false;
     }
     return val;
+}
+
+if (module.parent){
+    module.exports = startAdapter;
+} else {
+    startAdapter();
 }
