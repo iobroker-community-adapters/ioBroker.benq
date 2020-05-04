@@ -2,7 +2,6 @@
 const utils = require('@iobroker/adapter-core');
 let async = require('async');
 let net = require('net');
-
 let benq_commands = require(__dirname + '/admin/commands.json'),
     COMMANDS = benq_commands.models,
     COMMAND_MAPPINGS = benq_commands.command_mapping;
