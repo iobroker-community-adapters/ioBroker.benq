@@ -5,7 +5,7 @@ let net = require('net');
 let benq_commands = require(__dirname + '/admin/commands.json'),
     COMMANDS = benq_commands.models,
     COMMAND_MAPPINGS = benq_commands.command_mapping;
-let adapter, connection = false, benq, query_power, rct, buffer = '', permis = false, permis_get_cmd = false, states = {}, old_states = {}, pollcmd = 'vol=?', polling_time = 10000;
+let adapter, connection = false, benq, query_power, rct, buffer = '', permis = false, permis_get_cmd = false, states = {}, old_states = {}, pollcmd = 'vol=?', polling_time = 10000, timeOut, timeOutGetCmd, timeOutTime;
 
 function startAdapter(options){
     return adapter = utils.adapter(Object.assign({}, options, {
@@ -16,6 +16,9 @@ function startAdapter(options){
             if (benq){
                 query_power && clearInterval(query_power);
                 rct && clearInterval(rct);
+                timeOut && clearTimeout(timeOut);
+                timeOutGetCmd && clearTimeout(timeOutGetCmd);
+                timeOutTime && clearTimeout(timeOutTime);
                 connection = false;
                 _connection(false);
                 benq.destroy();
@@ -45,19 +48,19 @@ function startAdapter(options){
                     if (cmd){
                         if (cmd === 'pow' && val === 'off'){
                             permis_get_cmd = false;
-                            setTimeout(() => {
+                            timeOut = setTimeout(() => {
                                 permis_get_cmd = true;
                             }, 120000);
 
                         } else if (cmd === 'pow' && val === 'on'){
                             permis_get_cmd = false;
-                            setTimeout(() => {
+                            timeOut = setTimeout(() => {
                                 permis_get_cmd = true;
                             }, 20000);
                         } else {
                             permis_get_cmd = false;
                             permis = false;
-                            setTimeout(() => {
+                            timeOut = setTimeout(() => {
                                 permis_get_cmd = true;
                                 permis = true;
                             }, 5000);
@@ -235,7 +238,7 @@ function parse_command(str){
 function get_commands(){
     let result = [];
     permis = false;
-    setTimeout(() => {
+    timeOutGetCmd = setTimeout(() => { 
         permis = true;
     }, 60000);
     async.each(Object.keys(COMMANDS), (cmd) => {
@@ -244,7 +247,7 @@ function get_commands(){
         adapter.log.error('Error async.each');
     });
     result.forEach((cmd, i, arr) => {
-        setTimeout(() => {
+        timeOutTime = setTimeout(() => {
             if (COMMANDS[cmd] && permis_get_cmd){
                 if (COMMANDS[cmd].hasOwnProperty('values')){
                     adapter.log.debug('send_command ' + COMMANDS[cmd].name);

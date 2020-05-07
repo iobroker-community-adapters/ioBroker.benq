@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "news": {
+      "0.2.2": {
+        "en": "fixed clearTimeout",
+        "de": "fixed clearTimeout",
+        "ru": "fixed clearTimeout",
+        "pt": "fixed clearTimeout",
+        "nl": "fixed clearTimeout",
+        "fr": "fixed clearTimeout",
+        "it": "fixed clearTimeout",
+        "es": "fixed clearTimeout",
+        "pl": "fixed clearTimeout",
+        "zh-cn": "fixed clearTimeout"
+      },
       "0.2.1": {
         "en": "support compact mode\nsupport admin3\nrefactoring",
         "de": "support compact mode\nsupport admin3\nrefactoring",
@@ -14,22 +26,6 @@
         "es": "support compact mode\nsupport admin3\nrefactoring",
         "pl": "support compact mode\nsupport admin3\nrefactoring",
         "zh-cn": "support compact mode\nsupport admin3\nrefactoring"
-      },
-      "0.2.0": {
-        "en": "fix error",
-        "de": "fix error",
-        "ru": "fix error",
-        "pt": "fix error",
-        "fr": "fix error",
-        "nl": "fix error"
-      },
-      "0.1.0": {
-        "en": "Beta release",
-        "de": "Beta release",
-        "ru": "Beta release",
-        "pt": "Beta release",
-        "fr": "Beta release",
-        "nl": "Beta release"
       }
     },
     "title": "BenQ projector",
