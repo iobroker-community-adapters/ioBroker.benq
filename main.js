@@ -101,6 +101,8 @@ function main(){
     }
 }
 
+let time;
+
 function connect(cb){
     let msg = '';
     let port = adapter.config.port ? adapter.config.port :23;
@@ -121,19 +123,31 @@ function connect(cb){
         //get_commands();
         cb && cb();
     });
+    let buf = [];
     benq.on('data', (chunk) => {
-        buffer += chunk.toString();
-        //adapter.log.error('Received: ' + message);
-        if (buffer.length > 50){
+        time && clearTimeout(time);
+        buffer += chunk.toString('utf8');
+        //adapter.log.error('Received: ' + buffer);
+        time = setTimeout(()=>{
+            console.log('<----- ' + buffer);
+            buffer = buffer.match(/(\*.*)/g) ? buffer.match(/(\*.*)/g)[0]: null;
+            console.log(' *** ' + buffer[buffer.indexOf('=') + 1]);
+            if(buffer && buffer[0] === '*' && buffer[buffer.indexOf('=') + 1] !== '?'){
+                console.log('----> ' + buffer);
+                //parse_command(buffer);
+            }
+            buffer = '';
+        }, 1000);
+        /*if (buffer.length > 50){
             buffer = '';
             benq.write('\r');
-        }
-        if (((~buffer.indexOf('\r\n>\u0000\r')) && buffer.length < 6) || ~buffer.indexOf('\r\n>\u0000\r\r\n>\u0000\r\r\n>\u0000')){
+        }*/
+        /*if (((~buffer.indexOf('\r\n>\u0000\r')) && buffer.length < 6) || ~buffer.indexOf('\r\n>\u0000\r\r\n>\u0000\r\r\n>\u0000')){
             adapter.log.debug('Set to zero. Length:' + buffer.length);
             benq.write('\r');
             buffer = '';
-        }
-        if (chunk.toString() === '\r'){
+        }*/
+        /*if (chunk.toString() === '\r'){
             msg = buffer.split('*');
             if (msg){
                 for (let i = 0; i < msg.length; i++) {
@@ -160,7 +174,7 @@ function connect(cb){
                 parse_command(msg);
             }
             buffer = '';
-        }
+        }*/
     });
 
     benq.on('error', (err) => {
@@ -202,8 +216,8 @@ function send(cmd, val){
 function parse_command(str){
     let cmd, val;
     if (!~str.indexOf('Unsupported') && !~str.indexOf('Block') && !~str.indexOf('Illegal')){
-        cmd = str.split('=')[0];
-        val = str.split('=')[1];
+        cmd = str.split('=')[0].replace('*', '');
+        val = str.split('=')[1].replace('#', '').replace('?', '');
         if (str === 'VOL'){
             cmd = 'pow';
             val = 'off';

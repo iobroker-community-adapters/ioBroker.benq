@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "news": {
+      "0.2.3": {
+        "en": "change test",
+        "de": "change test",
+        "ru": "change test",
+        "pt": "change test",
+        "nl": "change test",
+        "fr": "change test",
+        "it": "change test",
+        "es": "change test",
+        "pl": "change test",
+        "zh-cn": "change test"
+      },
       "0.2.2": {
         "en": "fixed clearTimeout",
         "de": "fixed clearTimeout",
@@ -84,10 +96,10 @@
       "_id": "power",
       "type": "state",
       "common": {
-        "role": "button.power",
+        "role": "power",
         "name": "Controlling power",
         "type": "boolean",
-        "read": false,
+        "read": true,
         "write": true,
         "def": false
       },
