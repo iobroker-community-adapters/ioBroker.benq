@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "news": {
       "0.2.3": {
         "en": "change test",
