@@ -1,8 +1,20 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "news": {
+      "0.2.5": {
+        "en": "fix error",
+        "de": "fix error",
+        "ru": "fix error",
+        "pt": "fix error",
+        "nl": "fix error",
+        "fr": "fix error",
+        "it": "fix error",
+        "es": "fix error",
+        "pl": "fix error",
+        "zh-cn": "fix error"
+      },
       "0.2.3": {
         "en": "change test",
         "de": "change test",
@@ -69,7 +81,19 @@
     ],
     "readme": "https://github.com/instalator/iobroker.benq/blob/master/README.md",
     "loglevel": "info",
-    "type": "multimedia"
+    "type": "multimedia",
+    "titleLang": {
+      "en": "BenQ projector Adapter",
+      "de": "BenQ Projektor Adapter",
+      "ru": "BenQ адаптер для проектора",
+      "pt": "Adaptador de projetor BenQ",
+      "nl": "BenQ projector Adapter",
+      "fr": "Adaptateur de projecteur BenQ",
+      "it": "Adattatore per proiettore BenQ",
+      "es": "Adaptador de proyector BenQ",
+      "pl": "Adapter projektora BenQ",
+      "zh-cn": "明基投影机适配器"
+    }
   },
   "native": {
     "host": "127.0.0.1",
