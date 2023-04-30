@@ -23,9 +23,17 @@ You will also need an Ethernet Shield W5100 or W5500 and an RS232 to TTL convert
 Supported models: W1200, W1070, W1080 to be...
 
 ## Changelog
+<!--
+    Placeholder for the next version (at the beginning of the line):
+    ### **WORK IN PROGRESS**
+-->
+### **WORK IN PROGRESS**
+-   (mcm1957) changed: Testing has been changed to support node 16, 18 and 20
+-   (mcm1957) changed: Dependencies have been updated
 
 ### 0.2.7
  * (instalator) fix error
+
 ### 0.2.4
  * (instalator) change test
 
