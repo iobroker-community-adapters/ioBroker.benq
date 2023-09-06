@@ -21,6 +21,9 @@
     "type": "git",
     "url": "https://github.com/instalator/ioBroker.benq.git"
   },
+  "engines": {
+    "node": ">= 16"
+  },
   "dependencies": {
     "async": "*",
     "@iobroker/adapter-core": "^2.4.0"
