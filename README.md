@@ -30,6 +30,7 @@ Supported models: W1200, W1070, W1080 to be...
 ### **WORK IN PROGRESS**
 -   (mcm1957) changed: Testing has been changed to support node 16, 18 and 20
 -   (mcm1957) changed: Dependencies have been updated
+-   (mcm1957) changed: Adapter requires node 16 or newer now
 
 ### 0.2.7
  * (instalator) fix error
