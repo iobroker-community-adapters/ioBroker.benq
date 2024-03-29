@@ -92,7 +92,17 @@
       "es": "proyector BenQ",
       "pl": "projektora BenQ",
       "zh-cn": "明基投影机适配器"
-    }
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.0"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=5.1.13"
+      }
+    ]
   },
   "native": {
     "host": "127.0.0.1",
