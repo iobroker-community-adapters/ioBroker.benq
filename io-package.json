@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.2.7",
+    "version": "0.3.0",
     "news": {
+      "0.3.0": {
+        "en": "Adapter requires node.js 18 and js-controller >= 5 now\nchanged: Testing has been changed to support node 18 and 20\nchanged: Dependencies have been updated",
+        "de": "Adapter benötigt node.js 18 und js-controller >= 5 jetzt\ngeändert: Die Prüfung wurde in den Stützknoten 18 und 20 geändert\ngeändert: Abhängigkeiten wurden aktualisiert",
+        "ru": "Адаптер требует node.js 18 и js-controller >= 5 сейчас\nизменено: Тестирование было изменено на узел 18 и 20\nизменено: Зависимость обновлена",
+        "pt": "Adapter requer node.js 18 e js-controller >= 5 agora\nmudou: Os testes foram alterados para suportar o nó 18 e 20\nmudou: As dependências foram atualizadas",
+        "nl": "Adapter vereist node.js 18 en js-controller Nu 5\ngewijzigd: Testen is gewijzigd om node 18 en 20 te ondersteunen\ngewijzigd: Afhankelijkheden zijn bijgewerkt",
+        "fr": "Adaptateur nécessite node.js 18 et js-controller >= 5 maintenant\nmodifié: Les essais ont été modifiés pour soutenir les nœuds 18 et 20\nmodifié: Les dépendances ont été actualisées",
+        "it": "Adattatore richiede node.js 18 e js-controller >= 5 ora\ncambiato: I test sono stati modificati per supportare il nodo 18 e 20\ncambiato: Le dipendenze sono state aggiornate",
+        "es": "Adaptador requiere node.js 18 y js-controller √= 5 ahora\ncambiado: Los exámenes se han modificado para apoyar los nodos 18 y 20\ncambiado: Se han actualizado las dependencias",
+        "pl": "Adapter wymaga node.js 18 i sterownika js- > = 5 teraz\nzmienione: Testy zostały zmienione, aby wspierać węzeł 18 i 20\nzmienione: Zaktualizowano zależności",
+        "uk": "Адаптер вимагає node.js 18 і js-controller >= 5 тепер\nзмінено: Тестування було змінено для підтримки вузла 18 та 20\nзмінено: Залежність було оновлено",
+        "zh-cn": "适配器需要节点.js 18和js控制器 QQ 现在5号\n已更改 : 测试已更改为支持节点18和20\n已更改 : 依赖关系已更新"
+      },
       "0.2.7": {
         "en": "fix error",
         "de": "fix error",
@@ -114,8 +127,7 @@
     "host": "127.0.0.1",
     "port": 23
   },
-  "objects": [
-  ],
+  "objects": [],
   "instanceObjects": [
     {
       "_id": "info.connection",
@@ -128,8 +140,7 @@
         "write": false,
         "def": false
       },
-      "native": {
-      }
+      "native": {}
     },
     {
       "_id": "power",
@@ -142,8 +153,7 @@
         "write": true,
         "def": false
       },
-      "native": {
-      }
+      "native": {}
     }
   ]
 }

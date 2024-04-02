@@ -27,7 +27,7 @@ Supported models: W1200, W1070, W1080 to be...
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.0 (2024-04-02)
 * (mcm1957) Adapter requires node.js 18 and js-controller >= 5 now
 * (mcm1957) changed: Testing has been changed to support node 18 and 20
 * (mcm1957) changed: Dependencies have been updated
