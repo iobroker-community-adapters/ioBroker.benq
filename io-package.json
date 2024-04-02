@@ -52,6 +52,18 @@
         "zh-cn": "support compact mode\nsupport admin3\nrefactoring"
       }
     },
+    "titleLang": {
+      "en": "BenQ projector",
+      "de": "BenQ Projektor ",
+      "ru": "BenQ для проектора",
+      "pt": "projetor BenQ",
+      "nl": "BenQ projector",
+      "fr": "projecteur BenQ",
+      "it": "proiettore BenQ",
+      "es": "proyector BenQ",
+      "pl": "projektora BenQ",
+      "zh-cn": "明基投影机适配器"
+    },
     "desc": {
       "en": "BenQ projector Adapter",
       "de": "BenQ Projektor Adapter",
@@ -67,36 +79,26 @@
     "authors": [
       "instalator"
     ],
+    "keywords": [
+      "benq projector"
+    ],
     "licenseInformation": {
       "license": "MIT",
       "type": "free"
     },
     "platform": "Javascript/Node.js",
-    "mode": "daemon",
     "icon": "benq.png",
     "enabled": false,
-    "compact": true,
-    "materialize": true,
-    "extIcon": "https://raw.githubusercontent.com/instalator/iobroker.benq/master/admin/benq.png",
-    "keywords": [
-      "benq projector"
-    ],
-    "readme": "https://github.com/instalator/iobroker.benq/blob/master/README.md",
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/iobroker.benq/master/admin/benq.png",
+    "readme": "https://github.com/iobroker-community-adapters/iobroker.benq/blob/master/README.md",
     "loglevel": "info",
     "tier": 2,
+    "mode": "daemon",
     "type": "multimedia",
-    "titleLang": {
-      "en": "BenQ projector",
-      "de": "BenQ Projektor ",
-      "ru": "BenQ для проектора",
-      "pt": "projetor BenQ",
-      "nl": "BenQ projector",
-      "fr": "projecteur BenQ",
-      "it": "proiettore BenQ",
-      "es": "proyector BenQ",
-      "pl": "projektora BenQ",
-      "zh-cn": "明基投影机适配器"
-    },
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "materialize": true,
     "dependencies": [
       {
         "js-controller": ">=5.0.0"
