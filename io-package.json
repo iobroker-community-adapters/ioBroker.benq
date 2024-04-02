@@ -67,7 +67,10 @@
     "authors": [
       "instalator"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
     "mode": "daemon",
     "icon": "benq.png",
@@ -80,6 +83,7 @@
     ],
     "readme": "https://github.com/instalator/iobroker.benq/blob/master/README.md",
     "loglevel": "info",
+    "tier": 2,
     "type": "multimedia",
     "titleLang": {
       "en": "BenQ projector",
