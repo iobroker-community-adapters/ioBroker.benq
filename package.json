@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "async": "*",
-    "@iobroker/adapter-core": "^3.1.6"
+    "@iobroker/adapter-core": "^3.3.2"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.8.0",
