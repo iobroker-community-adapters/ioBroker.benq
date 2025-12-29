@@ -90,7 +90,8 @@
       "zh-cn": "明基投影机适配器"
     },
     "authors": [
-      "instalator"
+      "instalator",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
     ],
     "keywords": [
       "benq projector"
@@ -114,12 +115,12 @@
     "materialize": true,
     "dependencies": [
       {
-        "js-controller": ">=5.0.0"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.1.13"
+        "admin": ">=7.6.17"
       }
     ]
   },
