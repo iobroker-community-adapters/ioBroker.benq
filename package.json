@@ -10,6 +10,7 @@
   "homepage": "https://github.com/iobroker-community-adapters/iobroker.benq",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "benq prjector"
   ],
   "repository": {
