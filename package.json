@@ -18,7 +18,7 @@
     "url": "https://github.com/iobroker-community-adapters/ioBroker.benq.git"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "dependencies": {
     "async": "*",
