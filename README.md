@@ -27,8 +27,7 @@ Supported models: W1200, W1070, W1080 to be...
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.3.1 (2026-02-12)
 - (mcm1957) Adapter requires node.js >= 20  now
 - (copilot) Adapter requires js-controller >= 6.0.11 now
 - (copilot) Adapter requires admin >= 7.6.17 now
@@ -47,14 +46,6 @@ Supported models: W1200, W1070, W1080 to be...
 
 ### 0.2.2
  * (instalator) fixed clearTimeout
-
-### 0.2.1
- * (instalator) support compact mode
- * (instalator) support admin3
- * (instalator) refactoring
-
-### 0.0.6
-  (instalator) initial
 
 ## License
 The MIT License (MIT)

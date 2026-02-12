@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "benq",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "news": {
+      "0.3.1": {
+        "en": "Adapter requires node.js >= 20  now\nAdapter requires js-controller >= 6.0.11 now\nAdapter requires admin >= 7.6.17 now\nchanged: Dependencies have been updated",
+        "de": "Adapter benötigt node.js >= 20 jetzt\nAdapter benötigt jetzt js-controller >= 6.0.11\nAdapter benötigt admin >= 7.6.17 jetzt\ngeändert: Abhängigkeiten wurden aktualisiert",
+        "ru": "Адаптер требует node.js >= 20 сейчас\nАдаптер требует js-контроллер >= 6.0.11\nАдаптер требует администратора >= 7.6.17\nизменено: Зависимости были обновлены",
+        "pt": "Adaptador requer nod.js >= 20 agora\nAdaptador requer js-controlador >= 6.0.11 agora\nAdaptador requer admin >= 7.6.17 agora\nalterado: As dependências foram atualizadas",
+        "nl": "Voor de adapter zijn node.js < 20 now\nAdapter vereist js-controller > 6,0.11 nu\nVoor adapter is admin < 7.6.17 nu nodig\ngewijzigd: Afhankelijkheden zijn bijgewerkt",
+        "fr": "Adaptateur nécessite node.js >= 20 maintenant\nAdaptateur nécessite js-controller >= 6.0.11 maintenant\nAdaptateur nécessite admin >= 7.6.17 maintenant\nmodifié: Les dépendances ont été actualisées",
+        "it": "Adattatore richiede node.js >= 20 ora\nAdattatore richiede js-controller >= 6.0.11 ora\nAdattatore richiede admin >= 7.6.17 ora\ncambiato: Le dipendenze sono state aggiornate",
+        "es": "Adaptador requiere node.js >= 20 ahora\nAdaptador requiere js-controller >= 6.0.11\nAdaptador requiere administración= 7.6.17 ahora\ncambiado: Se han actualizado las dependencias",
+        "pl": "Adapter wymaga node.js > = 20\nAdapter wymaga sterownika js- > = 6.0.11\nAdapter wymaga admin > = 7.6.17\nzmienione: Zaktualizowano zależności",
+        "uk": "Адаптер вимагає node.js >= 20 тепер\nАдаптер вимагає js-controller >=6.0.11 тепер\nАдаптер вимагає адмін >= 7.6.17 тепер\nзмінено: Залежність було оновлено",
+        "zh-cn": "适配器需要节点.js >= 20 现在\n适配器需要js控制器 现在6.0.11\n适任者需要行政主管 现在7.6.17\n已更改 : 依赖关系已更新"
+      },
       "0.3.0": {
         "en": "Adapter requires node.js 18 and js-controller >= 5 now\nchanged: Testing has been changed to support node 18 and 20\nchanged: Dependencies have been updated",
         "de": "Adapter benötigt node.js 18 und js-controller >= 5 jetzt\ngeändert: Die Prüfung wurde in den Stützknoten 18 und 20 geändert\ngeändert: Abhängigkeiten wurden aktualisiert",
