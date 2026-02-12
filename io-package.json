@@ -16,18 +16,6 @@
         "uk": "Адаптер вимагає node.js 18 і js-controller >= 5 тепер\nзмінено: Тестування було змінено для підтримки вузла 18 та 20\nзмінено: Залежність було оновлено",
         "zh-cn": "适配器需要节点.js 18和js控制器 QQ 现在5号\n已更改 : 测试已更改为支持节点18和20\n已更改 : 依赖关系已更新"
       },
-      "0.2.7": {
-        "en": "fix error",
-        "de": "fix error",
-        "ru": "fix error",
-        "pt": "fix error",
-        "nl": "fix error",
-        "fr": "fix error",
-        "it": "fix error",
-        "es": "fix error",
-        "pl": "fix error",
-        "zh-cn": "fix error"
-      },
       "0.2.3": {
         "en": "change test",
         "de": "change test",
