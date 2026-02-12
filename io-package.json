@@ -26,7 +26,8 @@
         "it": "change test",
         "es": "change test",
         "pl": "change test",
-        "zh-cn": "change test"
+        "zh-cn": "change test",
+        "uk": "змінити тест"
       },
       "0.2.2": {
         "en": "fixed clearTimeout",
@@ -38,7 +39,8 @@
         "it": "fixed clearTimeout",
         "es": "fixed clearTimeout",
         "pl": "fixed clearTimeout",
-        "zh-cn": "fixed clearTimeout"
+        "zh-cn": "fixed clearTimeout",
+        "uk": "виправлено clearTimeout"
       },
       "0.2.1": {
         "en": "support compact mode\nsupport admin3\nrefactoring",
@@ -50,7 +52,8 @@
         "it": "support compact mode\nsupport admin3\nrefactoring",
         "es": "support compact mode\nsupport admin3\nrefactoring",
         "pl": "support compact mode\nsupport admin3\nrefactoring",
-        "zh-cn": "support compact mode\nsupport admin3\nrefactoring"
+        "zh-cn": "support compact mode\nsupport admin3\nrefactoring",
+        "uk": "підтримка компактного режиму\nпідтримка admin3\nрефакторинг"
       }
     },
     "titleLang": {
@@ -63,7 +66,8 @@
       "it": "proiettore BenQ",
       "es": "proyector BenQ",
       "pl": "projektora BenQ",
-      "zh-cn": "明基投影机适配器"
+      "zh-cn": "明基投影机适配器",
+      "uk": "Проектор BenQ"
     },
     "desc": {
       "en": "BenQ projector Adapter",
@@ -75,7 +79,8 @@
       "it": "Adattatore per proiettore BenQ",
       "es": "Adaptador de proyector BenQ",
       "pl": "Adapter projektora BenQ",
-      "zh-cn": "明基投影机适配器"
+      "zh-cn": "明基投影机适配器",
+      "uk": "Адаптер для проектора BenQ"
     },
     "authors": [
       "instalator",
