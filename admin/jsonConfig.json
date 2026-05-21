@@ -1,0 +1,52 @@
+{
+    "type": "panel",
+    "items": {
+        "host": {
+            "type": "text",
+            "label": "host",
+            "xs": 12,
+            "sm": 12,
+            "md": 8,
+            "lg": 8,
+            "xl": 8
+        },
+        "port": {
+            "type": "number",
+            "label": "port",
+            "min": 1,
+            "max": 65535,
+            "xs": 12,
+            "sm": 12,
+            "md": 4,
+            "lg": 4,
+            "xl": 4
+        },
+        "model_options": {
+            "type": "select",
+            "label": "model",
+            "options": [
+                {
+                    "value": "",
+                    "label": "Select Option"
+                },
+                {
+                    "value": "W1070",
+                    "label": "W1070"
+                },
+                {
+                    "value": "W1080",
+                    "label": "W1080"
+                },
+                {
+                    "value": "W1200",
+                    "label": "W1200"
+                }
+            ],
+            "xs": 12,
+            "sm": 12,
+            "md": 6,
+            "lg": 6,
+            "xl": 6
+        }
+    }
+}
